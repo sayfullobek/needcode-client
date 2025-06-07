@@ -14,9 +14,10 @@ import {
 } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import { Loader } from '../../component/Loader'
 import { APP_API } from '../../config/BaseConfig'
-import { AutoGet } from '../../config/service/AppService'
+import { AutoGet, AutoSave } from '../../config/service/AppService'
 import { DASHBOARD_URL } from '../../utils/Utils'
 
 export const OneCourse = () => {
@@ -43,6 +44,32 @@ export const OneCourse = () => {
 			)
 			setLessons(res.data)
 		} catch (err) {}
+	}
+
+	const startCourse = async () => {
+		const data = new FormData()
+		data.append('users', localStorage.getItem('token'))
+		data.append('course', id)
+
+		const res = await AutoSave(
+			data,
+			`${APP_API.saveCourse}`,
+			'',
+			navigate,
+			``,
+			''
+		)
+
+		console.log(res)
+
+		if (res) {
+			console.log(modules)
+			navigate(
+				`/${DASHBOARD_URL.dashboardStudent}/${status}/go-lessons/${id}/${modules[0]._id}/empty`
+			)
+		}
+
+		return Swal.fire({ icon: 'error', title: 'Nimadir Xato', timer: 1500 })
 	}
 	useEffect(() => {
 		getAll()
@@ -98,11 +125,7 @@ export const OneCourse = () => {
 				</Grid>
 				<Grid item>
 					<Button
-						onClick={() =>
-							navigate(
-								`/${DASHBOARD_URL.dashboardStudent}/${status}/go-lessons/${id}/${modules[0]._id}/empty`
-							)
-						}
+						onClick={() => startCourse()}
 						variant='contained'
 						color='primary'
 						size='large'
@@ -128,7 +151,31 @@ export const OneCourse = () => {
 						</Typography>
 						<ul>
 							{course.learns.map(item => (
-								<li>{item.name}</li>
+								<div
+									style={{
+										display: 'flex',
+										alignItems: 'center',
+										marginTop: '20px',
+									}}
+								>
+									<img
+										src={`${APP_API.upload}/${item.photo}`}
+										alt=''
+										style={{
+											width: '50px',
+											height: '50px',
+											borderRadius: '50%',
+											objectFit: 'cover',
+										}}
+									/>
+									<p
+										style={{
+											marginLeft: '20px',
+										}}
+									>
+										{item.name}
+									</p>
+								</div>
 							))}
 						</ul>
 					</CardContent>

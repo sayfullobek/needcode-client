@@ -34,14 +34,18 @@ export const CourseStudent = ({ status }) => {
 	const getAll = async (page = 1, limit = 10) => {
 		try {
 			const res = await AutoGet(
-				`${APP_API.course}/courseMode?courseMode=${status === 'course' ? 'COURSE' : 'PROJECT'}&page=${page}&limit=${limit}`
+				status === 'start'
+					? `${APP_API.saveCourse}/user-course/${localStorage.getItem('token')}`
+					: `${APP_API.course}/courseMode?courseMode=${status === 'course' ? 'COURSE' : 'PROJECT'}&page=${page}&limit=${limit}`
 			)
-			setData(res.data)
+			setData(status === 'start' ? res.data : res.data)
 			setTotalItems(res.totalItems)
 			const searchs = await AutoGet(
-				`${APP_API.course}/courseMode?courseMode=${status === 'course' ? 'COURSE' : 'PROJECT'}&page=1&limit=${res.totalItems}`
+				status === 'start'
+					? `${APP_API.saveCourse}/user-course/${localStorage.getItem('token')}`
+					: `${APP_API.course}/courseMode?courseMode=${status === 'course' ? 'COURSE' : 'PROJECT'}&page=1&limit=${res.totalItems}`
 			)
-			setForSearch(searchs.data)
+			setForSearch(status === 'start' ? searchs.data : searchs.data)
 			setLoading(true)
 		} catch (err) {}
 	}

@@ -2,10 +2,14 @@ export const NEED_CODE = 'auth/dashboard'
 export const NEED_CODE_STUDENT = 'dashboard'
 
 export const DASHBOARD_URL = {
+	mainCourse: `${NEED_CODE_STUDENT}/course-all`,
+
 	dashboardStudent: `${NEED_CODE_STUDENT}`,
 	projectStudent: `${NEED_CODE_STUDENT}/project`,
 	courseStudent: `${NEED_CODE_STUDENT}/course`,
 	sourceCodeStudent: `${NEED_CODE_STUDENT}/source-code`,
+	studentCourse: `${NEED_CODE_STUDENT}/course`,
+	studentStartCourse: `${NEED_CODE_STUDENT}/startCourse`,
 
 	dashboard: `${NEED_CODE}`,
 	course: `${NEED_CODE}/course`,

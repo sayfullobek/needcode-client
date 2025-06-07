@@ -25,6 +25,8 @@ export const APP_API = {
 	module: `${BASE_URL}/module`,
 	lesson: `${BASE_URL}/lesson`,
 	getMe: `${BASE_URL}/auth/get-me`,
+	saveCourse: `${BASE_URL}/saveCourse`,
+	comment: `${BASE_URL}/comment`,
 }
 
 export const BASE_CONFIG = {

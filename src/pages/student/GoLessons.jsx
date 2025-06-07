@@ -1,5 +1,6 @@
 import BarChartIcon from '@mui/icons-material/BarChart'
 import DescriptionIcon from '@mui/icons-material/Description'
+import StarIcon from '@mui/icons-material/Star'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { createTheme } from '@mui/material/styles'
@@ -101,6 +102,10 @@ export const GoLessons = ({ window }) => {
 		}
 	}
 
+	const grade = async () => {
+		console.log(1)
+	}
+
 	// Asosiy malumotlarni olish va navigation yasash
 	const fetchAll = async () => {
 		try {
@@ -113,7 +118,8 @@ export const GoLessons = ({ window }) => {
 			const modulesRes = await AutoGet(`${APP_API.module}/${id}`)
 			setModules(modulesRes.data)
 
-			const navItems = await Promise.all(
+			// 1. Avval modullar uchun navItems yaratamiz
+			const modulesNavItems = await Promise.all(
 				modulesRes.data.map(async mod => ({
 					title: mod.name,
 					icon: <BarChartIcon htmlColor='green' />,
@@ -121,11 +127,32 @@ export const GoLessons = ({ window }) => {
 				}))
 			)
 
+			// 2. Fikr bildirish uchun alohida item yaratamiz
+			const feedbackItem = {
+				title: 'Fikr Bildirish',
+				icon: <StarIcon htmlColor='green' />,
+				children: await getFeedbackItems(), // Bu funksiya siz yaratishingiz kerak
+			}
+
+			// 3. Ikkalasini birlashtiramiz
+			const navItems = [...modulesNavItems, feedbackItem]
+
 			setNavigation(navItems)
 			setLoading(true)
 		} catch (err) {
 			console.error('Xatolik:', err)
 		}
+	}
+
+	// Fikr bildirish uchun children items
+	const getFeedbackItems = async () => {
+		return [
+			{
+				segment: `${DASHBOARD_URL.dashboardStudent}/${status}/feedback-form`,
+				title: 'Fikr qoldirish',
+				icon: <StarIcon htmlColor='green' />,
+			},
+		]
 	}
 
 	// Bitta darsni olish

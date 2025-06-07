@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Course from './component/main/Course'
 import { DashboardLayouts } from './layout/DashboardLayout'
+import MainLayout from './layout/MainLayout'
 import { Login } from './pages/auth/Login'
 import { Register } from './pages/auth/Register'
 import { Courses } from './pages/dashboard/course/Courses'
@@ -8,12 +10,14 @@ import { GoCourse } from './pages/dashboard/course/GoCourse'
 import { GoModule } from './pages/dashboard/course/GoModule'
 import { LessonAddAndUpdate } from './pages/dashboard/course/LessonAddAndUpdate'
 import { ModuleAddAndUpdate } from './pages/dashboard/course/ModuleAddAndUpdate'
+import Dashboard from './pages/dashboard/Dashboard'
 import { Employee } from './pages/dashboard/employees/Employee'
 import { EmployeeAddAndUpdate } from './pages/dashboard/employees/EmployeeAddAndUpdate'
 import { Learn } from './pages/dashboard/learn/Learn'
 import { LearnAddAndUpdate } from './pages/dashboard/learn/LearnAddAndUpdate'
 import { SourceCode } from './pages/dashboard/sourceCode/SourceCode'
 import { SourceCodeAddAndUpdate } from './pages/dashboard/sourceCode/SourceCodeAddAndUpdate'
+import { StudentAll } from './pages/dashboard/student/StudentAll'
 import { WhoFor } from './pages/dashboard/whoFor/WhoFor'
 import { WhoForAddAndUpdate } from './pages/dashboard/whoFor/WhoForAddAndUpdate'
 import { Menu } from './pages/Menu'
@@ -27,7 +31,10 @@ function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path='/' element={<Menu />} />
+				<Route path='/' element={<MainLayout />}>
+					<Route index element={<Menu />} />
+					<Route path={`/${DASHBOARD_URL.mainCourse}`} element={<Course />} />
+				</Route>
 				<Route path={`/${DASHBOARD_URL.login}`} element={<Login />} />
 				<Route path={`/${DASHBOARD_URL.register}`} element={<Register />} />
 				<Route
@@ -60,11 +67,17 @@ function App() {
 						path={`/${DASHBOARD_URL.sourceCodeStudent}`}
 						element={<SourceCodeStudent />}
 					/>
+
+					<Route
+						path={`/${DASHBOARD_URL.studentStartCourse}`}
+						element={<CourseStudent status={'start'} />}
+					/>
 				</Route>
 				<Route
 					path={`/${DASHBOARD_URL.dashboard}`}
 					element={<DashboardLayouts />}
 				>
+					<Route path={`/${DASHBOARD_URL.dashboard}`} element={<Dashboard />} />
 					<Route path={`/${DASHBOARD_URL.course}`} element={<Courses />} />
 					<Route
 						path={`/${DASHBOARD_URL.goCourse}/:id`}
@@ -141,6 +154,7 @@ function App() {
 						path={`/${DASHBOARD_URL.employeeUpdate}/:id`}
 						element={<EmployeeAddAndUpdate />}
 					/>
+					<Route path={`/${DASHBOARD_URL.students}`} element={<StudentAll />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

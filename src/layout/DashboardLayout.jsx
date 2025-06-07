@@ -2,6 +2,7 @@ import AutoStories from '@mui/icons-material/AutoStories'
 import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import GroupAddIcon from '@mui/icons-material/GroupAdd'
+import OutlinedFlagIcon from '@mui/icons-material/OutlinedFlag'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
 import SourceIcon from '@mui/icons-material/Source'
 import Box from '@mui/material/Box'
@@ -163,6 +164,11 @@ export const DashboardLayouts = props => {
 							segment: DASHBOARD_URL.sourceCodeStudent,
 							title: 'Kod manbalari',
 							icon: <SourceIcon htmlColor='green' />,
+						},
+						{
+							segment: DASHBOARD_URL.studentStartCourse,
+							title: 'Boshlangan Kurslar',
+							icon: <OutlinedFlagIcon htmlColor='green' />,
 						},
 					]
 				: []

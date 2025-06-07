@@ -150,7 +150,8 @@ export const AutoTable = ({
 									<TableCell key={field.name}>{row[field.name]}</TableCell>
 								)
 							)}
-							{pathName != `/${DASHBOARD_URL.course}` ? (
+							{pathName != `/${DASHBOARD_URL.course}` &&
+							pathName != `/${DASHBOARD_URL.students}` ? (
 								<TableCell>
 									<Button
 										variant='contained'

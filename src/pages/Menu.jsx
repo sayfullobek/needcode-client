@@ -1,67 +1,58 @@
-import {
-	AppBar,
-	Box,
-	Button,
-	Container,
-	Toolbar,
-	Typography,
-} from '@mui/material'
+import { Box } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import Carausel from '../component/main/Carousel'
+import Course from '../component/main/Course'
 
 export const Menu = () => {
 	const navigate = useNavigate()
 	return (
-		<Box
-			sx={{
-				height: '100vh',
-				display: 'flex',
-				flexDirection: 'column',
-			}}
-		>
-			{/* Navbar */}
-			<AppBar position='static'>
-				<Toolbar>
-					<Typography variant='h6' component='div'>
-						Need Code
-					</Typography>
-				</Toolbar>
-			</AppBar>
-
-			{/* Body - Centered Buttons */}
-			<Box
+		<Box>
+			{/* <Box
 				sx={{
-					flexGrow: 1,
+					height: '100vh',
 					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
+					flexDirection: 'column',
+					overflow: 'auto',
 				}}
 			>
-				<Container
+				<Box
 					sx={{
+						flexGrow: 1,
 						display: 'flex',
-						gap: 2,
 						justifyContent: 'center',
-						flexWrap: 'wrap',
+						alignItems: 'center',
+						height: '100vh',
 					}}
 				>
-					<Button
-						variant='contained'
-						color='primary'
-						size='large'
-						onClick={() => navigate('auth/register')}
+					<Container
+						sx={{
+							display: 'flex',
+							gap: 2,
+							justifyContent: 'center',
+							flexWrap: 'wrap',
+						}}
 					>
-						Ro'yxatdan o'tish
-					</Button>
-					<Button
-						variant='outlined'
-						color='secondary'
-						size='large'
-						onClick={() => navigate('/auth/login')}
-					>
-						Xisobga kirish
-					</Button>
-				</Container>
-			</Box>
+						<Button
+							variant='contained'
+							color='primary'
+							size='large'
+							onClick={() => navigate('auth/register')}
+						>
+							Ro'yxatdan o'tish
+						</Button>
+						<Button
+							variant='outlined'
+							color='secondary'
+							size='large'
+							onClick={() => navigate('/auth/login')}
+						>
+							Xisobga kirish
+						</Button>
+					</Container>
+				</Box>
+			</Box> */}
+			<Carausel />
+			<Course />
 		</Box>
 	)
 }

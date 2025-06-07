@@ -10,11 +10,12 @@ import { DASHBOARD_URL } from '../utils/Utils'
 export const CourseComp = ({ item }) => {
 	const navigate = useNavigate()
 	const path = useLocation().pathname.split('/')[2]
+	console.log(item, path)
 	return (
 		<Card
 			onClick={() =>
 				navigate(
-					`/${path === 'course' ? DASHBOARD_URL.courseStudent : DASHBOARD_URL.projectStudent}/${item._id}`
+					`/${path === 'course' ? DASHBOARD_URL.courseStudent : DASHBOARD_URL.projectStudent}/${item.course?._id ? item.course?._id : item._id}`
 				)
 			}
 			sx={{ width: '24%', height: '42vh' }}
@@ -24,12 +25,12 @@ export const CourseComp = ({ item }) => {
 					component='img'
 					sx={{ height: '80%' }}
 					width='100%'
-					image={`${APP_API.upload}/${item.photo}`}
+					image={`${APP_API.upload}/${item.course?.photo ? item.course?.photo : item.photo}`}
 					alt={item.name}
 				/>
 				<CardContent sx={{ height: '20%' }}>
 					<Typography gutterBottom variant='h5' component='div'>
-						{item.name}
+						{item.course?.name ? item.course?.name : item.name}
 					</Typography>
 				</CardContent>
 			</CardActionArea>
